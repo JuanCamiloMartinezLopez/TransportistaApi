@@ -8,8 +8,5 @@
         "dist",
         "node_modules"
     ],
-    "exec": "ts-node ./src/index.ts",
-    "events": {
-        "restart": "npm run lint"
-    }
+    "exec": "ts-node-dev --poll ./src/api/index.ts"
 }
