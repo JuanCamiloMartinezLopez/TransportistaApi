@@ -19,14 +19,12 @@ class EnvioController implements interfaces.Controller {
   @httpPost('/registro', authentication, schemaValidator.body(creacionEnvioSchema))
   async create(@request() req: ValidatedRequest<registroEnvioRequestSchema>, @response() res: Response) {
     const envio = await this.registroEnvioUseCase.execute(req.body);
-    console.log(envio);
     res.status(200).send({ envio: envio });
   }
 
   @httpGet('/', authentication)
   async get(@request() req: ValidatedRequest<registroEnvioRequestSchema>, @response() res: Response) {
     const envios = await this.obtnerEnvioUseCase.execute();
-    console.log(envios);
     res.status(200).send({ envios: envios });
   }
 }
