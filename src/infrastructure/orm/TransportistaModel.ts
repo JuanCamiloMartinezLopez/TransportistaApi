@@ -28,4 +28,7 @@ export class TransportistaModel {
 
   @OneToMany(() => VehiculoModel, (vehiculo) => vehiculo.transportista)
   vehiculos!: VehiculoModel[];
+
+  @Column({ default: true })
+  activo!: boolean;
 }

@@ -18,7 +18,6 @@ export class DireccionRepositoryImpl implements DireccionRepository {
 
   async create(Direccion: Direccion): Promise<Direccion> {
     const direccionEntity = EntityMapper.toPersistence(Direccion);
-    console.log('direccion entity', direccionEntity);
     return await this.DireccionRepo.save(direccionEntity);
   }
 }
