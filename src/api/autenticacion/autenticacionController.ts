@@ -6,7 +6,7 @@ import { ValidatedRequest } from 'express-joi-validation';
 import { loginAuthSchema, loginRequestSchema } from './schemas/autenticacionSchemas';
 import { TYPES } from '@constants/types';
 import { AutenticacionUsuarioUseCase } from '@application/usesCases/autenticacionUsuario';
-import { AutenticacionUsuarioInterface } from '@domain/interfaces/autenticacionUsuario.interface';
+import { AutenticacionUsuarioInterface } from '@domain/interfaces/IUseCases/autenticacionUsuario.interface';
 import Logger from '@middleware/logger';
 
 @controller('/auth')
