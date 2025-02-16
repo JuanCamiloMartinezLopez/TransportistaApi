@@ -1,4 +1,4 @@
 export const RolesPremisos = {
   cliente: ['/envio/registro'],
-  admin: []
+  admin: ['/envio/']
 };

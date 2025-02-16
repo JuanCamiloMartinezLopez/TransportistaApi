@@ -15,9 +15,17 @@ export class EnvioRepositoryImpl implements EnvioRepository {
   ) {
     this.EnvioRepo = this.db.connection().getRepository(EnvioModel);
   }
+  async get(): Promise<Envio[]> {
+    const envios_raw = await this.EnvioRepo.find({
+      relations: ['usuario', 'direccion', 'ruta', 'estados'] // Incluir direcciones
+    });
+    console.log('envios', envios_raw);
+    const envios: Envio[] = envios_raw.map((envio) => EntityMapper.toDomain(envio, Envio));
+    return envios;
+  }
 
   async create(Envio: Envio): Promise<Envio> {
-    const usuarioEntity = EntityMapper.toPersistence(Envio);
-    return await this.EnvioRepo.save(usuarioEntity);
+    const envioEntity = EntityMapper.toPersistence(Envio);
+    return await this.EnvioRepo.save(envioEntity);
   }
 }
