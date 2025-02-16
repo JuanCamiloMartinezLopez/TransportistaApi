@@ -10,16 +10,19 @@ import { EnvioRepositoryImpl } from '@infrastructure/repositories/EnvioRepositor
 import { DireccionRepositoryImpl } from '@infrastructure/repositories/DireccionRepositoryImpl';
 import { DireccionRepository } from '@domain/interfaces/IRepositorys/DireccionRepository.interface';
 import { RegistroEnvioUseCase } from '@application/usesCases/registroEnvio';
+import { AddressValidationNominatiom } from '@application/externalServices/addressValidationNominatim';
+import { ObtenerEnvioUseCase } from '@application/usesCases/obtenerEnvio';
+import { Redis } from '@infrastructure/database/redisdb';
 import './api/usuario/usuarioController';
 import './api/autenticacion/autenticacionController';
 import './api/envio/envioController';
-import { AddressValidation } from '@domain/interfaces/IExternalServices/addressValidation.interface';
-import { AddressValidationNominatiom } from '@application/externalServices/addressValidationNominatim';
 
 const container = new Container();
 
 //database
 container.bind<Database>(TYPES.Database).to(Database).inSingletonScope();
+container.bind<Redis>(TYPES.Redis).to(Redis).inSingletonScope();
+
 //repositorios
 container.bind<UsuarioRepository>(TYPES.UsuarioRepository).to(UsuarioRepositoryImpl);
 container.bind<EnvioRepository>(TYPES.EnvioRepository).to(EnvioRepositoryImpl);
@@ -33,6 +36,7 @@ container.bind<DireccionRepository>(TYPES.DireccionRepository).to(DireccionRepos
 container.bind<RegistroUsuarioUseCase>(TYPES.RegistroUsuarioUseCase).to(RegistroUsuarioUseCase);
 container.bind<AutenticacionUsuarioUseCase>(TYPES.AutenticacionUsuarioUseCase).to(AutenticacionUsuarioUseCase);
 container.bind<RegistroEnvioUseCase>(TYPES.RegistroEnvioUseCase).to(RegistroEnvioUseCase);
+container.bind<ObtenerEnvioUseCase>(TYPES.ObtenerEnvioUseCase).to(ObtenerEnvioUseCase);
 
 //servicios
 container.bind<AddressValidationNominatiom>(TYPES.AddressValidation).to(AddressValidationNominatiom);
