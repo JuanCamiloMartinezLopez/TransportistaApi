@@ -1,17 +1,17 @@
 import { EnvioModel } from '@infrastructure/orm/EnvioModel';
 import { Envio } from '@domain/entities/Envio';
 import { TYPES } from '@constants/types';
-import Database from '@infrastructure/database/data-source';
 import { EnvioRepository } from '@domain/interfaces/IRepositorys/EnvioRepository.interface';
 import { EntityMapper } from '@infrastructure/mappers/EntityMapper';
 import { injectable, inject } from 'inversify';
+import { DatabaseInterface } from '@domain/interfaces/IRepositorys/Database.interface';
 
 @injectable()
 export class EnvioRepositoryImpl implements EnvioRepository {
   private EnvioRepo;
   constructor(
-    @inject(TYPES.Database)
-    private readonly db: Database
+    @inject(TYPES.DatabaseInterface)
+    private readonly db: DatabaseInterface
   ) {
     this.EnvioRepo = this.db.connection().getRepository(EnvioModel);
   }
@@ -21,7 +21,7 @@ export class EnvioRepositoryImpl implements EnvioRepository {
       where: { usuario: { id } },
       relations: ['usuario', 'direccion', 'ruta', 'estados'] // Incluir direcciones
     });
-    const envios: Envio[] = envios_raw.map((envio) => EntityMapper.toDomain(envio, Envio));
+    const envios: Envio[] = envios_raw.map((envio: EnvioModel) => EntityMapper.toDomain(envio, Envio));
     return envios;
   }
 
@@ -40,7 +40,7 @@ export class EnvioRepositoryImpl implements EnvioRepository {
     const envios_raw = await this.EnvioRepo.find({
       relations: ['usuario', 'direccion', 'ruta', 'estados'] // Incluir direcciones
     });
-    const envios: Envio[] = envios_raw.map((envio) => EntityMapper.toDomain(envio, Envio));
+    const envios: Envio[] = envios_raw.map((envio: EnvioModel) => EntityMapper.toDomain(envio, Envio));
     return envios;
   }
 

@@ -4,14 +4,14 @@ import { DireccionRepository } from '@domain/interfaces/IRepositorys/DireccionRe
 import { DireccionModel } from '@infrastructure/orm/DireccionModel';
 import { Direccion } from '@domain/entities/Direccion';
 import { TYPES } from '@constants/types';
-import Database from '@infrastructure/database/data-source';
+import { DatabaseInterface } from '@domain/interfaces/IRepositorys/Database.interface';
 
 @injectable()
 export class DireccionRepositoryImpl implements DireccionRepository {
   private DireccionRepo;
   constructor(
-    @inject(TYPES.Database)
-    private readonly db: Database
+    @inject(TYPES.DatabaseInterface)
+    private readonly db: DatabaseInterface
   ) {
     this.DireccionRepo = this.db.connection().getRepository(DireccionModel);
   }

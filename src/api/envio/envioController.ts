@@ -10,6 +10,7 @@ import { RegistroEnvioInterface } from '@domain/interfaces/IUseCases/registroEnv
 import { ObtenerEnviosInterface } from '@domain/interfaces/IUseCases/obtenerEnvios.interface';
 import { ConsultarEstadosEnviosInterface } from '@domain/interfaces/IUseCases/consultarEstadoEnvios.interface';
 import { CustomError } from 'src/utils/CustomError';
+import { DatabaseCache } from '@domain/interfaces/IRepositorys/DatabaseCache.interface';
 
 interface Request extends ExpressRequest {
   usuario_id?: string;

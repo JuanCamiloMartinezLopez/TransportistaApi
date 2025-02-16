@@ -1,7 +1,7 @@
 export const TYPES = {
   //db
-  Database: Symbol.for('Database'),
-  Redis: Symbol.for('Redis'),
+  DatabaseInterface: Symbol.for('DatabaseInterface'),
+  DatabaseCache: Symbol.for('DatabaseCache'),
   //repositorios
   UsuarioRepository: Symbol.for('UsuarioRepository'),
   EnvioRepository: Symbol.for('EnvioRepository'),

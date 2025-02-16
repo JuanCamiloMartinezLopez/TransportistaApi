@@ -36,8 +36,8 @@ import { ConsultarEstadosEnviosUseCase } from '@application/usesCases/consultarE
 const container = new Container();
 
 //database
-container.bind<Database>(TYPES.Database).to(Database).inSingletonScope();
-container.bind<Redis>(TYPES.Redis).to(Redis).inSingletonScope();
+container.bind<Database>(TYPES.DatabaseInterface).to(Database).inSingletonScope();
+container.bind<Redis>(TYPES.DatabaseCache).to(Redis).inSingletonScope();
 
 //repositorios
 container.bind<UsuarioRepository>(TYPES.UsuarioRepository).to(UsuarioRepositoryImpl);
