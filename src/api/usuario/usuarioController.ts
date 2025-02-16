@@ -5,7 +5,7 @@ import { creacionUsuarioSchema, registroUsuarioRequestSchema } from './schemas/u
 import { Request, Response } from 'express';
 import { ValidatedRequest } from 'express-joi-validation';
 import { TYPES } from '@constants/types';
-import { RegistroUsuarioInterface } from '@domain/interfaces/registroUsuario.interface';
+import { RegistroUsuarioInterface } from '@domain/interfaces/IUseCases/registroUsuario.interface';
 
 @controller('/usuario')
 class UsuarioController implements interfaces.Controller {
@@ -15,11 +15,6 @@ class UsuarioController implements interfaces.Controller {
   async create(@request() req: ValidatedRequest<registroUsuarioRequestSchema>, @response() res: Response) {
     await this.registroUsuarioUseCase.execute(req.body);
     res.status(200).send('Usuario creado');
-  }
-
-  @httpGet('/saludo')
-  getSaludo(@request() req: Request, @response() res: Response) {
-    res.status(200).send('Hola mundo');
   }
 }
 

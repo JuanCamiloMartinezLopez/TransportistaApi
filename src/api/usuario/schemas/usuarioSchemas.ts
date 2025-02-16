@@ -13,7 +13,10 @@ const creacionUsuarioSchema = Joi.object({
     .regex(/^[0-9]{10}$/)
     .required()
     .messages({ 'string.pattern.base': 'telefono invalido', 'any.required': 'telefono requerido' }),
-  direccion: Joi.string().required().messages({ 'any.required': 'direccion requerida' })
+  roles: Joi.string()
+    .pattern(new RegExp(/^[a-zA-Z]+(,[a-zA-Z]+)*$/))
+    .required()
+    .messages({ 'string.pattern.base': 'role(s) invalido(s)', 'any.required': 'role(s) requerido(s)' })
 });
 
 interface registroUsuarioRequestSchema extends ValidatedRequestSchema {
@@ -23,7 +26,7 @@ interface registroUsuarioRequestSchema extends ValidatedRequestSchema {
     email: string;
     password: string;
     telefono: string;
-    direccion: string;
+    roles: string;
   };
 }
 
