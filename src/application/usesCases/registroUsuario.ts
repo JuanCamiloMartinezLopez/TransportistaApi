@@ -1,8 +1,8 @@
 import { inject, injectable } from 'inversify';
-import { UsuarioRepository } from '@domain/interfaces/UsuarioRepository.interface';
+import { UsuarioRepository } from '@domain/interfaces/IRepositorys/UsuarioRepository.interface';
 import { Usuario } from '@domain/entities/Usuario';
 import { TYPES } from '@constants/types';
-import { RegistroUsuarioInterface } from '@domain/interfaces/registroUsuario.interface';
+import { RegistroUsuarioInterface } from '@domain/interfaces/IUseCases/registroUsuario.interface';
 import { hash } from 'bcrypt';
 
 @injectable()
@@ -17,7 +17,7 @@ export class RegistroUsuarioUseCase implements RegistroUsuarioInterface {
       usuarioData.email,
       usuarioData.password,
       usuarioData.telefono,
-      usuarioData.direccion
+      usuarioData.roles
     );
 
     const hashedPassword = await hash(usuario.password, 10);

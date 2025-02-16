@@ -1,3 +1,5 @@
+import { Envio } from './Envio';
+
 export class Usuario {
   constructor(
     public id: number | null,
@@ -6,7 +8,11 @@ export class Usuario {
     public email: string,
     public password: string,
     public telefono: string,
-    public direccion: string
+    public roles?: string,
+    public activo?: boolean,
+    public envios?: Envio[],
+    public fechaCreacion?: Date,
+    public fechaModificacion?: Date
   ) {}
 
   setPassword(encryptPass: string) {
