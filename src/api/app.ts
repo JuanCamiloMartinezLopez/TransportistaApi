@@ -28,7 +28,8 @@ export default new InversifyExpressServer(container, null, { rootPath: '/api/v1'
     app.use(cookieParser());
     app.use(cors());
     app.use(morganMiddleware);
+    setupSwagger(app);
   })
-  .setErrorConfig((app: express.Application) => {
-    app.use(errorHandler);
+  .setErrorConfig((application: express.Application) => {
+    application.use(errorHandler);
   });

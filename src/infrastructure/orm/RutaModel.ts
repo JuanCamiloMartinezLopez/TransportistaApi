@@ -2,6 +2,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { TransportistaModel } from './TransportistaModel';
 import { EnvioModel } from './EnvioModel';
+import { EstadosRuta } from '@constants/estadosRuta';
 
 @Entity('ruta')
 export class RutaModel {
@@ -17,8 +18,11 @@ export class RutaModel {
   @Column()
   destino!: string;
 
-  @Column({ name: 'tiempo_estimado' })
-  tiempoEstimado!: number;
+  @Column({ name: 'estado_ruta', type: 'enum', enum: EstadosRuta, default: EstadosRuta.GESTION })
+  estadoRuta!: EstadosRuta;
+
+  @Column({ default: true })
+  activo!: boolean;
 
   @CreateDateColumn({ name: 'fecha_creacion', type: 'timestamp' })
   fechaCreacion!: Date;

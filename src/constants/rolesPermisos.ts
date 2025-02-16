@@ -1,4 +1,4 @@
 export const RolesPremisos = {
   cliente: ['/envio/registro'],
-  admin: []
+  admin: ['/envio/', '/ruta/asignar_envios', '/ruta/registro', '/vehiculo/registro', '/transportista/registro']
 };

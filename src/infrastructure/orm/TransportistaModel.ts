@@ -20,12 +20,15 @@ export class TransportistaModel {
   @CreateDateColumn({ name: 'fecha_creacion', type: 'timestamp' })
   fechaCreacion!: Date;
 
-  @Column({ name: 'fecha_modificacion', type: 'timestamp' })
+  @UpdateDateColumn({ name: 'fecha_modificacion', type: 'timestamp' })
   fechaModificacion!: Date;
 
-  @OneToMany(() => RutaModel, (ruta) => ruta.transportista)
+  @OneToMany(() => RutaModel, (ruta) => ruta.transportista, { cascade: true })
   rutas!: RutaModel[];
 
-  @OneToMany(() => VehiculoModel, (vehiculo) => vehiculo.transportista)
+  @OneToMany(() => VehiculoModel, (vehiculo) => vehiculo.transportista, { cascade: true })
   vehiculos!: VehiculoModel[];
+
+  @Column({ default: true })
+  activo!: boolean;
 }
