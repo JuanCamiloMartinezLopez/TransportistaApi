@@ -12,11 +12,15 @@ export class Envio {
     public alto: number,
     public ancho: number,
     public profundidad: number,
-    public ruta: Ruta | null,
-    public estados: EstadoEnvio[] | null,
-    public direccion?: Direccion | null,
+    public estados?: EstadoEnvio[],
+    public ruta?: Ruta,
+    public direccion?: Direccion,
     public activo?: boolean,
     public fechaCreacion?: Date,
     public fechaModificacion?: Date
   ) {}
+
+  calcularVolumen(): number {
+    return this.alto * this.ancho * this.profundidad;
+  }
 }

@@ -16,7 +16,7 @@ export class RegistroVehiculoUseCase implements RegistroVehiculoInterface {
       throw new CustomError('vehiculo ya existe', 400);
     }
 
-    vehiculo = new Vehiculo(null, vehiculoData.placa, vehiculoData.capacidad_volumen, vehiculoData.capacidad_peso, null);
+    vehiculo = new Vehiculo(null, vehiculoData.placa, vehiculoData.capacidad_volumen, vehiculoData.capacidad_peso);
 
     await this.vehiculoRepository.create(vehiculo);
   }

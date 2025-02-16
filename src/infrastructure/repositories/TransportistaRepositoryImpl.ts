@@ -17,7 +17,7 @@ export class TransportistaRepositoryImpl implements TransportistaRepository {
   }
 
   async findByEmail(email: string): Promise<Transportista | null> {
-    const transportistaEntity = await this.TransportistaRepo.findOne({ where: { correo: email } });
+    const transportistaEntity = await this.TransportistaRepo.findOne({ where: { correo: email }, relations: ['rutas', 'vehiculos'] });
     if (!transportistaEntity) {
       return null;
     }
@@ -25,7 +25,7 @@ export class TransportistaRepositoryImpl implements TransportistaRepository {
   }
 
   async findById(id: number): Promise<Transportista | null> {
-    const transportistaEntity = await this.TransportistaRepo.findOne({ where: { id } });
+    const transportistaEntity = await this.TransportistaRepo.findOne({ where: { id }, relations: ['rutas', 'vehiculos'] });
     if (!transportistaEntity) {
       return null;
     }

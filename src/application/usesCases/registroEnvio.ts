@@ -21,17 +21,17 @@ export class RegistroEnvioUseCase implements RegistroEnvioInterface {
     try {
       const estado_envio = new EstadoEnvio(null, EstadosEnvio.ESPERA);
 
-      const envio = new Envio(null, envioData.peso, envioData.usuario, envioData.tipoProducto, envioData.alto, envioData.ancho, envioData.profundidad, null, [
+      const envio = new Envio(null, envioData.peso, envioData.usuario, envioData.tipoProducto, envioData.alto, envioData.ancho, envioData.profundidad, [
         estado_envio
       ]);
       const direccion = new Direccion(
         null,
         envioData.direccion!.direccion,
         envioData.direccion!.barrio,
-        envioData.direccion!.codigoPostal,
         envioData.direccion!.ciudad,
         envioData.direccion!.departamento,
-        [envio]
+        [envio],
+        envioData.direccion?.codigoPosta
       );
       if (await this.addressValidetor.buscarDireccion(direccion)) {
         await this.repositoryDireccion.create(direccion);

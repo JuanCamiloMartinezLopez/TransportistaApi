@@ -17,7 +17,7 @@ export class VehiculoRepositoryImpl implements VehiculoRepository {
   }
 
   async findByPlace(placa: string): Promise<Vehiculo | null> {
-    const vehiculoEntity = await this.VehiculoRepo.findOne({ where: { placa } });
+    const vehiculoEntity = await this.VehiculoRepo.findOne({ where: { placa }, relations: ['transportista'] });
     if (!vehiculoEntity) {
       return null;
     }
@@ -25,7 +25,7 @@ export class VehiculoRepositoryImpl implements VehiculoRepository {
   }
 
   async findById(id: number): Promise<Vehiculo | null> {
-    const vehiculoEntity = await this.VehiculoRepo.findOne({ where: { id } });
+    const vehiculoEntity = await this.VehiculoRepo.findOne({ where: { id }, relations: ['transportista'] });
     if (!vehiculoEntity) {
       return null;
     }

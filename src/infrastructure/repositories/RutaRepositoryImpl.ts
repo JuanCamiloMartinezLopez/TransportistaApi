@@ -16,7 +16,7 @@ export class RutaRepositoryImpl implements RutaRepository {
     this.RutaRepo = this.db.connection().getRepository(RutaModel);
   }
   async findById(id: number): Promise<Ruta | null> {
-    const rutaEntity = await this.RutaRepo.findOne({ where: { id } });
+    const rutaEntity = await this.RutaRepo.findOne({ where: { id }, relations: ['transportista', 'envios'] });
     if (!rutaEntity) {
       return null;
     }

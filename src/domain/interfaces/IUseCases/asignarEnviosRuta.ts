@@ -1,3 +1,3 @@
 export interface AsignarEnviosRutaInterface {
-  execute(envios_ruta: any): Promise<void>;
+  execute(envios_ruta: any): Promise<number[]>;
 }

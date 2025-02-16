@@ -16,7 +16,7 @@ export class RegistroTransportistaUseCase implements RegistroTransportistaInterf
       throw new CustomError('transportista ya existe', 400);
     }
 
-    transportista = new Transportista(null, transportistaData.nombre, transportistaData.telefono, transportistaData.correo, null, null);
+    transportista = new Transportista(null, transportistaData.nombre, transportistaData.telefono, transportistaData.correo);
 
     await this.transportistaRepository.create(transportista);
   }

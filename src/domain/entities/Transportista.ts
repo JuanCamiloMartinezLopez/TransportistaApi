@@ -7,8 +7,8 @@ export class Transportista {
     public nombre: string,
     public telefono: string,
     public correo: string,
-    public rutas: Ruta[] | null,
-    public vehiculos: Vehiculo[] | null,
+    public rutas?: Ruta[],
+    public vehiculos?: Vehiculo[],
     public activo?: boolean,
     public fechaCreacion?: Date,
     public fechaModificacion?: Date

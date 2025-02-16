@@ -18,8 +18,12 @@ class RutaController implements interfaces.Controller {
 
   @httpPost('/asignar_envios', authentication, schemaValidator.body(asignarEnviosRutaSchema))
   async asignar(@request() req: ValidatedRequest<registroEnviosRutaRequestSchema>, @response() res: Response) {
-    await this.asignarEnviosRutaUseCase.execute(req.body);
-    res.status(200).send({});
+    const enviosNoEncontrados = await this.asignarEnviosRutaUseCase.execute(req.body);
+    if (enviosNoEncontrados.length == 0) {
+      res.status(200).send({ message: 'envios asignados con exito' });
+    } else {
+      res.status(200).send({ message: 'envios asignados con exito', enviosNoAsignados: enviosNoEncontrados });
+    }
   }
 
   @httpPost('/registro', authentication, schemaValidator.body(creacionRutaSchema))

@@ -7,10 +7,10 @@ export class Direccion {
     public id: number | null,
     public direccion: string,
     public barrio: string,
-    public codigoPostal: string | null,
     public ciudad: Ciudades,
     public departamento: Departamentos,
-    public envios: Envio[] | null,
+    public envios?: Envio[],
+    public codigoPosta?: string,
     public activo?: boolean,
     public fechaCreacion?: Date,
     public fechaModificacion?: Date
