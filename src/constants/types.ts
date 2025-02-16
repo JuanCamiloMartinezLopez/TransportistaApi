@@ -19,6 +19,7 @@ export const TYPES = {
   RegistroRutaUseCase: Symbol.for('RegistroRutaUseCase'),
   RegistroVehiculoUseCase: Symbol.for('RegistroVehiculoUseCase'),
   RegistroTransportistaUseCase: Symbol.for('RegistroTransportistaUseCase'),
+  ConsultarEstadosEnviosUseCase: Symbol.for('ConsultarEstadosEnviosUseCase'),
   //services
   AddressValidation: Symbol.for('AddressValidation')
 };

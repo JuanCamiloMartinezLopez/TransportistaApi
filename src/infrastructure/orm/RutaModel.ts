@@ -34,6 +34,6 @@ export class RutaModel {
   @JoinColumn({ name: 'transportista_id' })
   transportista!: TransportistaModel;
 
-  @OneToMany(() => EnvioModel, (envio) => envio.ruta)
+  @OneToMany(() => EnvioModel, (envio) => envio.ruta, { cascade: true })
   envios!: EnvioModel[];
 }

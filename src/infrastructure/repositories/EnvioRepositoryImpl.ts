@@ -16,6 +16,15 @@ export class EnvioRepositoryImpl implements EnvioRepository {
     this.EnvioRepo = this.db.connection().getRepository(EnvioModel);
   }
 
+  async findByUsuarioId(id: number): Promise<Envio[]> {
+    const envios_raw = await this.EnvioRepo.find({
+      where: { usuario: { id } },
+      relations: ['usuario', 'direccion', 'ruta', 'estados'] // Incluir direcciones
+    });
+    const envios: Envio[] = envios_raw.map((envio) => EntityMapper.toDomain(envio, Envio));
+    return envios;
+  }
+
   async findById(id: number): Promise<Envio | null> {
     const envio_raw = await this.EnvioRepo.findOne({
       where: { id },

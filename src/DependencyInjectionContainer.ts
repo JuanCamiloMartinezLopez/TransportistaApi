@@ -31,6 +31,7 @@ import './api/envio/envioController';
 import './api/ruta/rutaController';
 import './api/transportista/transportistaController';
 import './api/vehiculo/vehiculoController';
+import { ConsultarEstadosEnviosUseCase } from '@application/usesCases/consultarEstadosEnvios';
 
 const container = new Container();
 
@@ -56,6 +57,7 @@ container.bind<AsignarEnviosRutaUseCase>(TYPES.AsignarEnviosRutaUseCase).to(Asig
 container.bind<RegistroRutaUseCase>(TYPES.RegistroRutaUseCase).to(RegistroRutaUseCase);
 container.bind<RegistroTransportistaUseCase>(TYPES.RegistroTransportistaUseCase).to(RegistroTransportistaUseCase);
 container.bind<RegistroVehiculoUseCase>(TYPES.RegistroVehiculoUseCase).to(RegistroVehiculoUseCase);
+container.bind<ConsultarEstadosEnviosUseCase>(TYPES.ConsultarEstadosEnviosUseCase).to(ConsultarEstadosEnviosUseCase);
 
 //servicios
 container.bind<AddressValidationNominatiom>(TYPES.AddressValidation).to(AddressValidationNominatiom);
