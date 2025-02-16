@@ -5,17 +5,63 @@ import { Response } from 'express';
 import { ValidatedRequest } from 'express-joi-validation';
 import { loginAuthSchema, loginRequestSchema } from './schemas/autenticacionSchemas';
 import { TYPES } from '@constants/types';
-import { AutenticacionUsuarioUseCase } from '@application/usesCases/autenticacionUsuario';
-import { AutenticacionUsuarioInterface } from '@domain/interfaces/autenticacionUsuario.interface';
+import { AutenticacionUsuarioInterface } from '@domain/interfaces/IUseCases/autenticacionUsuario.interface';
 import Logger from '@middleware/logger';
 
+/**
+ * @swagger
+ * tags:
+ *   name: Autenticación
+ *   description: Endpoints relacionados con Auth
+ */
+
+/**
+ * Controlador para manejar las operaciones relacionadas con la autenticacion.
+ */
 @controller('/auth')
 class AuthController implements interfaces.Controller {
   constructor(@inject(TYPES.AutenticacionUsuarioUseCase) private autenticacionUsuario: AutenticacionUsuarioInterface) {}
 
   @httpPost('/login', schemaValidator.body(loginAuthSchema))
+  /**
+   * @swagger
+   * /auth/login:
+   *   post:
+   *     summary: Crea una sesión de usuario mediante el login.
+   *     description: Este endpoint permite a un usuario iniciar sesión proporcionando su correo electrónico y contraseña. Si las credenciales son correctas, se devuelve un token de acceso en una cookie.
+   *     tags:
+   *       - Autenticación
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: './src/api/autenticacion/schemas/autenticacionSchemas.loginRequestSchema'
+   *     responses:
+   *       200:
+   *         description: Login correcto.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: login correcto
+   *       400:
+   *         description: Error al realizar el login.
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: Error al realizar el login
+   *     security:
+   *       - cookieAuth: []
+   */
   async create(@request() req: ValidatedRequest<loginRequestSchema>, @response() res: Response) {
-    console.log('request', req.body);
     const { email, password } = req.body;
     try {
       const token = await this.autenticacionUsuario.login(email, password);

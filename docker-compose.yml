@@ -10,6 +10,14 @@ services:
 #     env_file: 
 #       - .env
 
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    env_file:
+      - .env
+
   db:
     image: postgres:13
     restart: always

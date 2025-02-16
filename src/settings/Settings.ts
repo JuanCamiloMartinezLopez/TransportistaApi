@@ -9,6 +9,9 @@ const {
   NODE_ENV = 'development',
   ACCESS_TOKEN_SECRET,
   ACCESS_TOKEN_EXPIRES_IN_HOURS = '24',
+  OPENSTREETMAP_NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search',
+  REDIS_HOST = 'localhost',
+  REDIS_PORT = '6379',
   DB_HOST,
   DB_PORT,
   DB_USERNAME,
@@ -21,6 +24,11 @@ export default class Settings {
   static port: number = parseInt(PORT);
   static accessTokenSecret: string = ACCESS_TOKEN_SECRET!;
   static timeToExpireAccessToken = `${ACCESS_TOKEN_EXPIRES_IN_HOURS}h`;
+  static urlnominatim = OPENSTREETMAP_NOMINATIM_URL;
+  static redisDb = {
+    host: REDIS_HOST,
+    port: parseInt(REDIS_PORT)
+  };
   static database = {
     client: 'postgres',
     host: DB_HOST,

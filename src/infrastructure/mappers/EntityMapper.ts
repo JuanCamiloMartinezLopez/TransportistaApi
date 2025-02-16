@@ -1,3 +1,5 @@
+import { BaseEntity } from 'typeorm';
+
 export class EntityMapper {
   /**
    * Convierte un modelo de persistencia (ORM) a un modelo de dominio.
@@ -5,8 +7,14 @@ export class EntityMapper {
    * @param DomainClass - Clase de dominio a instanciar
    * @returns Instancia del dominio
    */
-  static toDomain<T>(raw: any, DomainClass: { new (...args: any[]): T }): T {
-    return new DomainClass(...Object.values(raw));
+  static toDomain<T extends object>(raw: any, DomainClass: { new (...args: any[]): T }): T {
+    const instance = new DomainClass();
+    Object.keys(raw).forEach((key) => {
+      if (key in instance) {
+        (instance as any)[key] = raw[key];
+      }
+    });
+    return instance;
   }
 
   /**
@@ -15,6 +23,15 @@ export class EntityMapper {
    * @returns Objeto plano para persistencia
    */
   static toPersistence<T>(domainEntity: T): any {
-    return { ...domainEntity };
+    return deepClone(domainEntity);
   }
+}
+
+/**
+ * Realiza una copia profunda de un objeto.
+ * @param obj - Objeto a clonar
+ * @returns Clon profundo del objeto
+ */
+function deepClone<T>(obj: T): T {
+  return JSON.parse(JSON.stringify(obj));
 }

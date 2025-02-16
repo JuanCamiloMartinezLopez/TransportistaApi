@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
+import { EnvioModel } from './EnvioModel';
 
 @Entity('usuario')
 export class UsuarioModel {
@@ -11,7 +12,7 @@ export class UsuarioModel {
   @Column()
   apellidos!: string;
 
-  @Column()
+  @Column({ unique: true })
   email!: string;
 
   @Column()
@@ -21,5 +22,17 @@ export class UsuarioModel {
   telefono!: string;
 
   @Column()
-  direccion!: string;
+  roles!: string;
+
+  @Column({ default: true })
+  activo!: boolean;
+
+  @OneToMany(() => EnvioModel, (envio) => envio.usuario)
+  envios!: EnvioModel[];
+
+  @CreateDateColumn({ name: 'fecha_creacion', type: 'timestamp' })
+  fechaCreacion!: Date;
+
+  @UpdateDateColumn({ name: 'fecha_modificacion', type: 'timestamp' })
+  fechaModificacion!: Date;
 }

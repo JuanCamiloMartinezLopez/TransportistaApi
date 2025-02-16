@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { EntityMapper } from '../mappers/EntityMapper';
-import { UsuarioRepository } from '@domain/interfaces/UsuarioRepository.interface';
+import { UsuarioRepository } from '@domain/interfaces/IRepositorys/UsuarioRepository.interface';
 import { UsuarioModel } from '@infrastructure/orm/UsuarioModel';
 import { Usuario } from '@domain/entities/Usuario';
 import { TYPES } from '@constants/types';
