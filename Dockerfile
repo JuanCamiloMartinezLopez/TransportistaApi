@@ -7,14 +7,20 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
+# Actualizar npm
+RUN npm install -g npm@11.1.0
+
+# Instalar dependencias
 RUN npm install
 
-# Copy the rest of the application code
+# Copiar el resto del código
 COPY . .
+
+# Compilar TypeScript a JavaScript
+#RUN npm run build
 
 # Expose the port the app runs on
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npm", "dev"]
+CMD ["npm","run", "dev"]
