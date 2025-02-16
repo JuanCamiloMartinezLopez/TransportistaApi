@@ -15,6 +15,10 @@ export const TYPES = {
   AutenticacionUsuarioUseCase: Symbol.for('AutenticacionUsuarioUseCase'),
   RegistroEnvioUseCase: Symbol.for('RegistroEnvioUseCase'),
   ObtenerEnvioUseCase: Symbol.for('ObtenerEnvioUseCase'),
+  AsignarEnviosRutaUseCase: Symbol.for('AsignarEnviosRutaUseCase'),
+  RegistroRutaUseCase: Symbol.for('RegistroRutaUseCase'),
+  RegistroVehiculoUseCase: Symbol.for('RegistroVehiculoUseCase'),
+  RegistroTransportistaUseCase: Symbol.for('RegistroTransportistaUseCase'),
   //services
   AddressValidation: Symbol.for('AddressValidation')
 };
