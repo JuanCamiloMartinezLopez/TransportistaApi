@@ -3,6 +3,12 @@ import { Settings } from '@settings';
 import Logger from '@middleware/logger';
 import { injectable } from 'inversify';
 import { UsuarioModel } from '@infrastructure/orm/UsuarioModel';
+import { DireccionModel } from '@infrastructure/orm/DireccionModel';
+import { EnvioModel } from '@infrastructure/orm/EnvioModel';
+import { EstadoEnvioModel } from '@infrastructure/orm/EstadoEnvioModel';
+import { RutaModel } from '@infrastructure/orm/RutaModel';
+import { TransportistaModel } from '@infrastructure/orm/TransportistaModel';
+import { VehiculoModel } from '@infrastructure/orm/VehiculoModel';
 
 const db_connetion_info = Settings.database;
 
@@ -21,7 +27,7 @@ class Database {
       database: db_connetion_info.database,
       synchronize: true,
       logging: true,
-      entities: [UsuarioModel],
+      entities: [UsuarioModel, DireccionModel, EnvioModel, EstadoEnvioModel, RutaModel, TransportistaModel, VehiculoModel],
       subscribers: [],
       migrations: []
     });
