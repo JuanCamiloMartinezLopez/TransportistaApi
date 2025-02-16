@@ -1,6 +1,6 @@
 import { TYPES } from '@constants/types';
 import { Usuario } from '@domain/entities/Usuario';
-import { UsuarioRepository } from '@domain/interfaces/UsuarioRepository.interface';
+import { UsuarioRepository } from '@domain/interfaces/IRepositorys/UsuarioRepository.interface';
 import { inject, injectable } from 'inversify';
 
 @injectable()
