@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "6b20c5b0-294e-4359-ab8b-97d8c06e1014",
+		"name": "TransportistaAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10774991"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "registro",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombres\": \"Juan\",\r\n    \"apellidos\": \"Martinez\",\r\n    \"email\": \"cliente@gmail.com\",\r\n    \"password\": \"JC$pruebas12\",\r\n    \"telefono\": \"3507050986\",\r\n    \"roles\":\"cliente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuario/registro",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuario",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"cliente@gmail.com\",\r\n    \"password\":\"JC$pruebas12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"martinezlopezjuancamilo@gmail.com\",\r\n    \"password\":\"JC$pruebas12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/logout",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Envio",
+			"item": [
+				{
+					"name": "registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"peso\": 100,\r\n    \"direccion\": {\r\n        \"direccion\": \"Carrera 77B #72A-35\",\r\n        \"barrio\": \"tabora\",\r\n        \"ciudad\": \"Bogotá\",\r\n        \"departamento\": \"Bogotá\"\r\n    },\r\n    \"tipoProducto\": \"string\",\r\n    \"alto\": 10,\r\n    \"ancho\": 10,\r\n    \"profundidad\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/envio/registro",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"envio",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/envio/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"envio",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "consultar_estado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/envio/consultar_estado",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"envio",
+								"consultar_estado"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ruta",
+			"item": [
+				{
+					"name": "registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"ruta1\",\r\n    \"origen\":\"Bogotá\",\r\n    \"destino\":\"Cali\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/ruta/registro",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"ruta",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "asignar_envios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ruta_id\": 1,\r\n    \"transportista_id\": 3,\r\n    \"envios\": [\r\n        1,\r\n        2,\r\n        3,\r\n        4,\r\n        5,\r\n        6,\r\n        7\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/ruta/asignar_envios",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"ruta",
+								"asignar_envios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transportista",
+			"item": [
+				{
+					"name": "registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"pepito perez\",\r\n    \"telefono\": \"1234567890\",\r\n    \"correo\": \"test@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/transportista/registro",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"transportista",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehiculo",
+			"item": [
+				{
+					"name": "registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"placa\": \"AAA111\",\r\n    \"capacidad_volumen\": 10000,\r\n    \"capacidad_peso\": 10000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/vehiculo/registro",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"vehiculo",
+								"registro"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "nominatim",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://nominatim.openstreetmap.org/search?q=Calle+45+%2323-10,+Bogotá,+Colombia&format=json",
+					"protocol": "https",
+					"host": [
+						"nominatim",
+						"openstreetmap",
+						"org"
+					],
+					"path": [
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Calle+45+%2323-10,+Bogotá,+Colombia"
+						},
+						{
+							"key": "format",
+							"value": "json"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

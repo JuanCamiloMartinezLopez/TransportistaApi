@@ -33,10 +33,9 @@
       "@constants/*": ["./src/constants/*"],
       "@middleware/*": ["./src/middleware/*"],
       "@settings": ["./src/settings/index.ts"],
-      "@dependencyInjectionContainer": ["./src/DependencyInjectionContainer"],
-      "@factories/*": ["./test/factories/*"]
+      "@dependencyInjectionContainer": ["./src/DependencyInjectionContainer"]
     }
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

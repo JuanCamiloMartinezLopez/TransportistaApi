@@ -5,7 +5,6 @@ import { Ciudades } from '@constants/ciudades';
 import { Departamentos } from '@constants/departamentos';
 
 const creacionEnvioSchema = Joi.object({
-  usuario: Joi.number().required().messages({ 'any.required': 'usuario requerido' }),
   peso: Joi.number().precision(2).greater(0).less(10000).required().messages({ 'any.required': 'usuario requerido' }),
   direccion: Joi.object({
     direccion: Joi.string()

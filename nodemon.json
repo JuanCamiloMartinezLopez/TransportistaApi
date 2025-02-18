@@ -8,5 +8,5 @@
         "dist",
         "node_modules"
     ],
-    "exec": "ts-node ./src/api/index.ts"
+    "exec": "ts-node src/api/index.ts"
 }

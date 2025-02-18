@@ -9,11 +9,12 @@ import { EstadoEnvioModel } from '@infrastructure/orm/EstadoEnvioModel';
 import { RutaModel } from '@infrastructure/orm/RutaModel';
 import { TransportistaModel } from '@infrastructure/orm/TransportistaModel';
 import { VehiculoModel } from '@infrastructure/orm/VehiculoModel';
+import { DatabaseInterface } from '@domain/interfaces/IRepositorys/Database.interface';
 
 const db_connetion_info = Settings.database;
 
 @injectable()
-class Database {
+class Database implements DatabaseInterface {
   private instance: DataSource;
 
   constructor() {
@@ -27,14 +28,14 @@ class Database {
       database: db_connetion_info.database,
       synchronize: true,
       logging: true,
-      entities: [UsuarioModel, DireccionModel, EnvioModel, EstadoEnvioModel, RutaModel, TransportistaModel, VehiculoModel],
+      entities: [__dirname + '/../orm/**/*.ts'],
       subscribers: [],
       migrations: []
     });
     this.initializeConnection();
   }
 
-  private async initializeConnection(): Promise<void> {
+  async initializeConnection(): Promise<void> {
     try {
       await this.instance.initialize();
       Logger.info('database initialized!');
@@ -44,7 +45,7 @@ class Database {
     }
   }
 
-  private async checkConnection(): Promise<void> {
+  async checkConnection(): Promise<void> {
     try {
       await this.instance.query('SELECT version();');
       Logger.info('database connected!');

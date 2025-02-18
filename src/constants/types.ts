@@ -1,7 +1,7 @@
 export const TYPES = {
   //db
-  Database: Symbol.for('Database'),
-  Redis: Symbol.for('Redis'),
+  DatabaseInterface: Symbol.for('DatabaseInterface'),
+  DatabaseCache: Symbol.for('DatabaseCache'),
   //repositorios
   UsuarioRepository: Symbol.for('UsuarioRepository'),
   EnvioRepository: Symbol.for('EnvioRepository'),
@@ -19,6 +19,7 @@ export const TYPES = {
   RegistroRutaUseCase: Symbol.for('RegistroRutaUseCase'),
   RegistroVehiculoUseCase: Symbol.for('RegistroVehiculoUseCase'),
   RegistroTransportistaUseCase: Symbol.for('RegistroTransportistaUseCase'),
+  ConsultarEstadosEnviosUseCase: Symbol.for('ConsultarEstadosEnviosUseCase'),
   //services
   AddressValidation: Symbol.for('AddressValidation')
 };

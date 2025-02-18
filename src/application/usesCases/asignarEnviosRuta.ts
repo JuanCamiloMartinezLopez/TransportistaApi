@@ -13,13 +13,14 @@ import Logger from '@middleware/logger';
 import { EnvioModel } from '@infrastructure/orm/EnvioModel';
 import Database from '@infrastructure/database/data-source';
 import { EstadosEnvio } from '@constants/estadosEnvio';
+import { DatabaseInterface } from '@domain/interfaces/IRepositorys/Database.interface';
 
 @injectable()
 export class AsignarEnviosRutaUseCase implements AsignarEnviosRutaInterface {
   constructor(
     @inject(TYPES.RutaRepository) private repositoryRuta: RutaRepository,
     @inject(TYPES.TransportistaRepository) private repositoryTransportista: TransportistaRepository,
-    @inject(TYPES.Database) private db: Database
+    @inject(TYPES.DatabaseInterface) private db: DatabaseInterface
   ) {}
 
   async execute(envios_ruta: any): Promise<number[]> {

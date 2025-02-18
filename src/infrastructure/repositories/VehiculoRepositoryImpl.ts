@@ -5,13 +5,14 @@ import Database from '@infrastructure/database/data-source';
 import { VehiculoRepository } from '@domain/interfaces/IRepositorys/VehiculoRepository.interface';
 import { EntityMapper } from '@infrastructure/mappers/EntityMapper';
 import { injectable, inject } from 'inversify';
+import { DatabaseInterface } from '@domain/interfaces/IRepositorys/Database.interface';
 
 @injectable()
 export class VehiculoRepositoryImpl implements VehiculoRepository {
   private VehiculoRepo;
   constructor(
-    @inject(TYPES.Database)
-    private readonly db: Database
+    @inject(TYPES.DatabaseInterface)
+    private readonly db: DatabaseInterface
   ) {
     this.VehiculoRepo = this.db.connection().getRepository(VehiculoModel);
   }
