@@ -1,12 +1,13 @@
 import schemaValidator from '@middleware/schemaValidator';
 import { inject } from 'inversify';
-import { interfaces, controller, httpPost, request, response } from 'inversify-express-utils';
+import { interfaces, controller, httpPost, request, response, httpGet } from 'inversify-express-utils';
 import { Response } from 'express';
 import { ValidatedRequest } from 'express-joi-validation';
 import { loginAuthSchema, loginRequestSchema } from './schemas/autenticacionSchemas';
 import { TYPES } from '@constants/types';
 import { AutenticacionUsuarioInterface } from '@domain/interfaces/IUseCases/autenticacionUsuario.interface';
 import Logger from '@middleware/logger';
+import authentication from '@middleware/authentication';
 
 /**
  * @swagger
@@ -61,7 +62,7 @@ class AuthController implements interfaces.Controller {
    *     security:
    *       - cookieAuth: []
    */
-  async create(@request() req: ValidatedRequest<loginRequestSchema>, @response() res: Response) {
+  async login(@request() req: ValidatedRequest<loginRequestSchema>, @response() res: Response) {
     const { email, password } = req.body;
     try {
       const token = await this.autenticacionUsuario.login(email, password);
@@ -69,6 +70,17 @@ class AuthController implements interfaces.Controller {
     } catch (err) {
       Logger.error(err);
       res.status(400).send({ message: 'Error al realizar el login' });
+    }
+  }
+
+  @httpGet('/logout', authentication)
+  async logout(@request() req: Request, @response() res: Response) {
+    try {
+      res.status(200).clearCookie('access_token');
+      res.send({ message: 'logout exitoso' });
+    } catch (err) {
+      Logger.error(err);
+      res.status(400).send({ message: 'Error al realizar el logout' });
     }
   }
 }

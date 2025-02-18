@@ -5,7 +5,11 @@ import { RolesPremisos } from '@constants/rolesPermisos';
 import * as jsonwebtoken from 'jsonwebtoken';
 import { CustomError } from 'src/utils/CustomError';
 
-const authentication = (request: Request, response: Response, next: NextFunction): void => {
+interface requestUser extends Request {
+  usuario_id?: string;
+}
+
+const authentication = (request: requestUser, response: Response, next: NextFunction): void => {
   const authCookie = request.cookies.access_token;
   if (!authCookie) {
     throw new CustomError('sin autenticacion', 401);
@@ -32,6 +36,8 @@ const authentication = (request: Request, response: Response, next: NextFunction
 
     Object.keys(request.body).includes('usuario') ? (request.body.usuario = decoded.usuario_id) : null;
     //request.user = decoded;
+
+    request.usuario_id = decoded.usuario_id;
   });
 
   return next();

@@ -4,4 +4,5 @@ export interface EnvioRepository {
   create(envio: Envio): Promise<Envio>;
   get(): Promise<Envio[]>;
   findById(id: number): Promise<Envio | null>;
+  findByUsuarioId(id: number): Promise<Envio[]>;
 }

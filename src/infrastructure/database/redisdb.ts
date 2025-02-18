@@ -1,9 +1,10 @@
 import { injectable } from 'inversify';
 import { createClient, RedisClientType } from 'redis';
 import { Settings } from '@settings';
+import { DatabaseCache } from '@domain/interfaces/IRepositorys/DatabaseCache.interface';
 
 @injectable()
-export class Redis {
+export class Redis implements DatabaseCache {
   private instance: RedisClientType;
   constructor() {
     this.instance = createClient({ url: `redis://${Settings.redisDb.host}:${Settings.redisDb.port}` });

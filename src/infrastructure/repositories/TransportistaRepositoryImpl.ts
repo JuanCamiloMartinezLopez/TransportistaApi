@@ -5,13 +5,14 @@ import Database from '@infrastructure/database/data-source';
 import { TransportistaRepository } from '@domain/interfaces/IRepositorys/TransportistaRepository.interface';
 import { EntityMapper } from '@infrastructure/mappers/EntityMapper';
 import { injectable, inject } from 'inversify';
+import { DatabaseInterface } from '@domain/interfaces/IRepositorys/Database.interface';
 
 @injectable()
 export class TransportistaRepositoryImpl implements TransportistaRepository {
   private TransportistaRepo;
   constructor(
-    @inject(TYPES.Database)
-    private readonly db: Database
+    @inject(TYPES.DatabaseInterface)
+    private readonly db: DatabaseInterface
   ) {
     this.TransportistaRepo = this.db.connection().getRepository(TransportistaModel);
   }

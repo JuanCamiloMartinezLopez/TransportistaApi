@@ -5,13 +5,14 @@ import { UsuarioModel } from '@infrastructure/orm/UsuarioModel';
 import { Usuario } from '@domain/entities/Usuario';
 import { TYPES } from '@constants/types';
 import Database from '@infrastructure/database/data-source';
+import { DatabaseInterface } from '@domain/interfaces/IRepositorys/Database.interface';
 
 @injectable()
 export class UsuarioRepositoryImpl implements UsuarioRepository {
   private UsuarioRepo;
   constructor(
-    @inject(TYPES.Database)
-    private readonly db: Database
+    @inject(TYPES.DatabaseInterface)
+    private readonly db: DatabaseInterface
   ) {
     this.UsuarioRepo = this.db.connection().getRepository(UsuarioModel);
   }

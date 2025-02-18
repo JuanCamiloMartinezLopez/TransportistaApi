@@ -1,36 +1,59 @@
-version: '3.8'
+
+
+version: "3.8"
 
 services:
-#   app:
-#     build: .
-#     ports:
-#       - "${PORT}:${PORT}"
-#     depends_on:
-#       - db
-#     env_file: 
-#       - .env
 
   redis:
     image: redis
+    container_name: redis
     restart: always
     ports:
-      - "${REDIS_PORT}:${REDIS_PORT}"
-    env_file:
-      - .env
+      - "6379:6379"  # 🔹 Valor fijo en lugar de ${REDIS_PORT}
+    networks:
+      - app_network
 
   db:
     image: postgres:13
     restart: always
+    container_name: postgres_db
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: transportista
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "5432:5432"  # 🔹 Valor fijo en lugar de ${DB_PORT}
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    env_file: 
-      - .env
+    networks:
+      - app_network
+
+  app:
+    build: .
+    container_name: api_service
+    restart: always
+    ports:
+      - "3000:3000"  # 🔹 Valor fijo en lugar de ${PORT}
+    depends_on:
+      - db
+      - redis
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      DB_DATABASE: transportista
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      ACCESS_TOKEN_SECRET: 74ced5af0c3d881dece9e69c2bd2c688677d7d20a222eb186a6be853933ab9669353d8cf6a22f1f831f6e3f4b5a0597cdd7623daa057b6628d89a1d7fb6719fd
+      ACCESS_TOKEN_EXPIRES_IN_HOURS: 24
+      OPENSTREETMAP_NOMINATIM_URL: https://nominatim.openstreetmap.org/search
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
 
 volumes:
   postgres-data:
